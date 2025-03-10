@@ -8,6 +8,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 export default function App() {
   return (
@@ -27,7 +28,9 @@ export default function App() {
           />
         </View>
         <Button title="Take image" onPress={() => Alert.alert('Take image')} />
-        <View style={styles.mapContainer}></View>
+        <View style={styles.mapContainer}>
+          <MapView style={styles.map} />
+        </View>
         <View style={styles.locationActionContainer}>
           <Button title="Locate user" />
 
@@ -47,7 +50,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'space-between',
     paddingHorizontal: 8,
     paddingVertical: 32, // TODO There should be a better way...
     color: '#333',
@@ -90,5 +92,9 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginTop: 8,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   },
 });
