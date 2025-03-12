@@ -5,7 +5,7 @@ export function PlaceItem({ place }: { place: IPlace }) {
   return (
     <Pressable style={style.root}>
       <View style={style.imageContainer}>
-        <Image source={require(place.imageUri)} />
+        <Image source={{ uri: place.imageUri }} />
       </View>
       <View style={style.infoContainer}>
         <Text>{place.title}</Text>
