@@ -5,6 +5,7 @@ import { AllPlaces } from './screens/AllPlaces';
 import { StatusBar } from 'expo-status-bar';
 import { AddPlace } from './screens/AddPlace';
 import { IconButton } from './ui/IconButton';
+import { Colors } from './constants/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,30 +14,43 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: Colors.primary500,
+            },
+            headerTintColor: Colors.gray700,
+            contentStyle: {
+              backgroundColor: Colors.gray700,
+            },
+          }}
+        >
           <Stack.Screen
-            name="All places"
+            name="AllPlaces"
             component={AllPlaces}
             options={({ navigation }) => ({
+              title: 'Your amazing places',
               headerRight: ({ tintColor }) => {
                 return (
                   <IconButton
                     name="add"
                     size={32}
-                    color={tintColor!}
-                    onPress={() => navigation.navigate('Add place')}
+                    color={tintColor as string}
+                    onPress={() => navigation.navigate('AddPlace')}
                   />
                 );
               },
             })}
           />
-          <Stack.Screen name="Add place" component={AddPlace} />
+          <Stack.Screen
+            name="AddPlace"
+            component={AddPlace}
+            options={{
+              title: 'Add new place',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

@@ -25,7 +25,6 @@ export function IconButton({
 const style = StyleSheet.create({
   button: {
     padding: 8,
-    margin: 4,
   },
   pressed: {
     opacity: 0.7,

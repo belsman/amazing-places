@@ -1,6 +1,7 @@
 import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { IPlace } from '../types/interfaces';
 import { PlaceItem } from './PlaceItem';
+import { Colors } from '../constants/colors';
 
 export function PlacesList({ places }: { places: IPlace[] }) {
   if (places.length === 0) {
@@ -25,6 +26,7 @@ export function PlacesList({ places }: { places: IPlace[] }) {
 const style = StyleSheet.create({
   fallbackText: {
     fontSize: 16,
+    color: Colors.primary200,
   },
   fallbackTextContainer: {
     flex: 1,
