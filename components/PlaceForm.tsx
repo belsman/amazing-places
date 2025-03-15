@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Colors } from '../constants/colors';
 import { ImagePicker } from './ImagePicker';
+import { LocationPicker } from './LocationPicker';
 
 export function PlaceForm() {
   const [placeName, setPlaceName] = useState('');

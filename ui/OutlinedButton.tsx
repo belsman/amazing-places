@@ -16,7 +16,7 @@ export function OutlinedButton({
       style={({ pressed }) => [style.button, pressed && style.pressed]}
       onPress={onPress}
     >
-      <Ionicons name={name} size={32} color={Colors.primary500} />
+      <Ionicons name={name} size={24} color={Colors.primary500} />
       <Text style={style.text}>{children}</Text>
     </Pressable>
   );
