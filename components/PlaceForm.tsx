@@ -24,6 +24,7 @@ export function PlaceForm() {
         />
       </View>
       <ImagePicker />
+      <LocationPicker />
     </ScrollView>
   );
 }
