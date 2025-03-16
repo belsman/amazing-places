@@ -38,7 +38,7 @@ export function LocationPicker() {
 
     setSelectedLocation({
       latitude: location.coords.latitude,
-      longitute: location.coords.longitude,
+      longitude: location.coords.longitude,
     });
   };
 
@@ -53,7 +53,7 @@ export function LocationPicker() {
   if (selectedLocation) {
     const uri = getPreviewMapLocation(
       selectedLocation.latitude,
-      selectedLocation.longitute
+      selectedLocation.longitude
     );
 
     previewedLocation = (

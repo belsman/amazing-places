@@ -1,6 +1,6 @@
 export interface ILocation {
   latitude: number;
-  longitute: number;
+  longitude: number;
 }
 
 export interface IPlace {
