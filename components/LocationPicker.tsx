@@ -1,9 +1,32 @@
 import { StyleSheet, View } from 'react-native';
-import { OutlinedButton } from '../ui/OutlinedButton';
+import {
+  requestForegroundPermissionsAsync,
+  PermissionStatus,
+  getCurrentPositionAsync,
+} from 'expo-location';
+
 import { Colors } from '../constants/colors';
+import { OutlinedButton } from '../ui/OutlinedButton';
 
 export function LocationPicker() {
-  const locateUser = () => {};
+  const askForPermission = async () => {
+    let { status } = await requestForegroundPermissionsAsync();
+    if (status !== PermissionStatus.GRANTED) {
+      console.log('Permission to access location was denied');
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const locateUser = async () => {
+    const hasPermsToAccessLocation = await askForPermission();
+
+    if (!hasPermsToAccessLocation) return;
+
+    const location = await getCurrentPositionAsync({});
+    console.log('***Location', location);
+  };
 
   const pickOnMap = () => {};
 
