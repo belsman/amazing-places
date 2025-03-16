@@ -9,12 +9,15 @@ import { Colors } from '../constants/colors';
 import { OutlinedButton } from '../ui/OutlinedButton';
 import { getPreviewMapLocation } from '../utils/location';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { MapScreenProp } from '../types/navigation';
+import { ILocation } from '../types/interfaces';
 
 export function LocationPicker() {
-  const [selectedLocation, setSelectedLocation] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
+  const navigator = useNavigation<MapScreenProp>();
+  const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
+    null
+  );
 
   const askForPermission = async () => {
     let { status } = await requestForegroundPermissionsAsync();
@@ -34,12 +37,14 @@ export function LocationPicker() {
     const location = await getCurrentPositionAsync({});
 
     setSelectedLocation({
-      lat: location.coords.latitude,
-      lng: location.coords.longitude,
+      latitude: location.coords.latitude,
+      longitute: location.coords.longitude,
     });
   };
 
-  const pickOnMap = () => {};
+  const pickOnMap = () => {
+    return navigator.navigate('Map');
+  };
 
   let previewedLocation = (
     <Text style={{ color: 'black' }}>No location picked yet</Text>
@@ -47,8 +52,8 @@ export function LocationPicker() {
 
   if (selectedLocation) {
     const uri = getPreviewMapLocation(
-      selectedLocation.lat,
-      selectedLocation.lng
+      selectedLocation.latitude,
+      selectedLocation.longitute
     );
 
     previewedLocation = (

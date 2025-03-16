@@ -1,4 +1,3 @@
-import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AllPlaces } from './screens/AllPlaces';
@@ -7,8 +6,9 @@ import { AddPlace } from './screens/AddPlace';
 import { IconButton } from './ui/IconButton';
 import { Colors } from './constants/colors';
 import { Map } from './screens/Map';
+import { RootStackParamList } from './types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
