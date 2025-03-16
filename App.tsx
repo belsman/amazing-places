@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { AddPlace } from './screens/AddPlace';
 import { IconButton } from './ui/IconButton';
 import { Colors } from './constants/colors';
+import { Map } from './screens/Map';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,14 @@ export default function App() {
             component={AddPlace}
             options={{
               title: 'Add new place',
+            }}
+          />
+
+          <Stack.Screen
+            name="Map"
+            component={Map}
+            options={{
+              title: 'Pick a place on the Map',
             }}
           />
         </Stack.Navigator>
