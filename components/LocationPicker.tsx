@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, Text } from 'react-native';
 import {
   requestForegroundPermissionsAsync,
   PermissionStatus,
@@ -7,8 +7,15 @@ import {
 
 import { Colors } from '../constants/colors';
 import { OutlinedButton } from '../ui/OutlinedButton';
+import { getPreviewMapLocation } from '../utils/location';
+import { useState } from 'react';
 
 export function LocationPicker() {
+  const [selectedLocation, setSelectedLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+
   const askForPermission = async () => {
     let { status } = await requestForegroundPermissionsAsync();
     if (status !== PermissionStatus.GRANTED) {
@@ -25,14 +32,38 @@ export function LocationPicker() {
     if (!hasPermsToAccessLocation) return;
 
     const location = await getCurrentPositionAsync({});
-    console.log('***Location', location);
+
+    setSelectedLocation({
+      lat: location.coords.latitude,
+      lng: location.coords.longitude,
+    });
   };
 
   const pickOnMap = () => {};
 
+  let previewedLocation = (
+    <Text style={{ color: 'black' }}>No location picked yet</Text>
+  );
+
+  if (selectedLocation) {
+    const uri = getPreviewMapLocation(
+      selectedLocation.lat,
+      selectedLocation.lng
+    );
+
+    previewedLocation = (
+      <Image
+        style={style.previewImage}
+        source={{
+          uri,
+        }}
+      />
+    );
+  }
+
   return (
     <>
-      <View style={style.locationReviewContainer}></View>
+      <View style={style.locationReviewContainer}>{previewedLocation}</View>
       <View style={style.actions}>
         <OutlinedButton name="location" onPress={locateUser}>
           Locate User
@@ -60,5 +91,9 @@ const style = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginVertical: 8,
+  },
+  previewImage: {
+    width: '100%',
+    height: '100%',
   },
 });
